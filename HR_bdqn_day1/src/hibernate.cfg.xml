@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+  <hibernate-configuration>
+       <!--  配置数据库连接信息 -->
+       <session-factory>
+  <!--  配置驱动  mysql 驱动 -->
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/smbms</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.connection.password"></property>
+  <!-- c3p0配置开始 -->
+  <!-- 最大连接数 -->
+  <property name="hibernate.c3p0.max_size">20</property>
+  <!-- 最小连接数 -->
+  <property name="hibernate.c3p0.min_size">5</property>
+  <!-- 获得连接的超时时间,如果超过这个时间,会抛出异常，单位毫秒 -->
+  <property name="hibernate.c3p0.timeout">120</property>
+  <!-- 最大的PreparedStatement的数量 -->
+  <property name="hibernate.c3p0.max_statements">100</property>
+  <!-- 每隔120秒检查连接池里的空闲连接 ，单位是秒-->
+  <property name="hibernate.c3p0.idle_test_period">120</property>
+  <!-- 当连接池里面的连接用完的时候，C3P0一下获取的新的连接数 -->
+  <property name="hibernate.c3p0.acquire_increment">2</property>
+  <!-- 每次都验证连接是否可用 -->
+  <property name="hibernate.c3p0.validate">true</property>
+  <!-- 配置方言 告诉hibernate 底层连接的数据库是谁       -->   
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>    
+  <!--  sql输出到日志  格式化输出 -->
+  <property name="hibernate.show_sql">true</property>
+  <!-- 是否格式化sql -->
+  <property name="format_sql">true</property>
+  <!-- 跟换数据库链接池提供商，默认使用hibernate -->
+  <property name="hibernate.cache.provider_class">org.hibernate.connection.CsP0ConnectionProvider</property>
+  <!-- 指定session范围和上下文
+  	采用sessionFactory的getCurrentSession()获取对象，不用session.close()方法，
+  	获取session会在提交回滚时自动关闭。
+  	getCurrentSession()创建并保持一个session对象，在该线程再次调用getCurrenrSession()时
+  	只返回和该线程绑定的session对象。保证了线程独立于线程安全
+   -->
+  <property name="current_session_context_class">thread</property>
+  <!-- <property name="hibernate.current_session_context_class">thread</property> -->
+  <!--  
+  	ddl  生成策略  
+   update
+        如果数据库中有表使用原来的表。如果没有表会创建一个表。而且可以更新原有表结构。
+    
+      如果往User 表添加一行数据           
+      当  hibernate.hbm2ddl.auto 设置   update  就会去检测 当前Users表有没有存在
+        在数据库中 ，如果没有先创建当前Users这张表 ，然后添加一行数据进去
+       如果有Users存在于数据库中， 则不会创建新的表，直接在原来的表中进行操作（添加一行数据）
+       
+       其他生成方式:
+       Create-drop	删除原有表结构，每次创建一个新表，执行后删除，一般用于测试
+       Create:		创建一个新表
+       Update:		可以通过映射实体类的属性添加表字段，且只能更新不能删除
+       Validate:	只会使用存在的表，并会对映射关系检测
+    -->
+  <property name="hibernate.hbm2ddl.auto">update</property>
+  <!--  注册映射文件 
+  	根据表数量配对对应的映射文件
+  -->
+  
+  <!-- 设置Session是否自动提交，默认为不自动提交（false），自动提交为true -->
+  <property name="hibernate.connection.autocommit">false</property>
+  
+  <mapping resource="com/bdqn/pojo/Users.hbm.xml"/>
+  
+  </session-factory>
+  
+  
+  
+  
+  </hibernate-configuration>
+  

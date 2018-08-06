@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <!--   表与实体的映射 （属性之间的映射）
+ 		class标签属性：
+ 			name:		类的全路径
+ 			table：		表名
+ 			catalog		数据库名（参考核心配置文件url）
+ 			
+  -->
+    <class  name="com.bdqn.pojo.Users"  table="users" >
+         <!--  id 唯一标记 -->
+         <!-- 
+         name 实体类 字段
+         type:  实体类 字段类型
+         column 代表的表的字段 
+          -->
+          <id name="id" type="java.lang.Integer" column="id" >
+          <!--  主键的生成策略  identity 
+          			用于mysql的主键生成策略，代表自动增长
+          -->
+            <generator class="identity" />
+          </id>
+        
+         <!-- property属性 
+         name 实体类属性名称 
+         type : 属性类型 
+         column 表的字段 
+         length: 数据长度
+         
+           -->  
+        <property name="name" type="java.lang.String" column="name" >
+        </property>
+        <property name="password" type="java.lang.String" column="password" >
+        </property>
+        <property name="telephone" type="java.lang.String" column="telephone" >
+        </property>
+        <property name="username" type="java.lang.String" column="username" >
+        </property>
+        <property name="isadmin" type="java.lang.String" column="isadmin" >
+        </property>
+    </class>
+    
+
+</hibernate-mapping>
+ 
+
