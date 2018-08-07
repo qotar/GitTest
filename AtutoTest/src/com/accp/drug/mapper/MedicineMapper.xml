@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.drug.mapper.MedicineMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.drug.pojo.Medicine" >
+    <id column="MedicineID" property="medicineID" jdbcType="INTEGER" />
+    <result column="MedicineName" property="medicineName" jdbcType="VARCHAR" />
+    <result column="CommonName" property="commonName" jdbcType="VARCHAR" />
+    <result column="Specification" property="specification" jdbcType="VARCHAR" />
+    <result column="ManufacturerID" property="manufacturerID" jdbcType="INTEGER" />
+    <result column="UnitID" property="unitID" jdbcType="INTEGER" />
+    <result column="DosageFormsID" property="dosageFormsID" jdbcType="INTEGER" />
+    <result column="GoodsKindID" property="goodsKindID" jdbcType="INTEGER" />
+    <result column="MCKID" property="MCKID" jdbcType="INTEGER" />
+    <result column="TinyUnitId" property="tinyUnitId" jdbcType="INTEGER" />
+    <result column="ModifierId" property="modifierId" jdbcType="VARCHAR" />
+    <result column="MedicineKindID" property="medicineKindID" jdbcType="INTEGER" />
+    <result column="TinyNumber" property="tinyNumber" jdbcType="INTEGER" />
+    <result column="TinySpecification" property="tinySpecification" jdbcType="VARCHAR" />
+    <result column="BarCode" property="barCode" jdbcType="VARCHAR" />
+    <result column="RetailStdPrice" property="retailStdPrice" jdbcType="DECIMAL" />
+    <result column="PurchasePrice" property="purchasePrice" jdbcType="DECIMAL" />
+    <result column="IsPrescription" property="isPrescription" jdbcType="INTEGER" />
+    <result column="SalePrice" property="salePrice" jdbcType="DECIMAL" />
+    <result column="Comment" property="comment" jdbcType="VARCHAR" />
+    <result column="StandardCode" property="standardCode" jdbcType="VARCHAR" />
+    <result column="IsHealthCare" property="isHealthCare" jdbcType="INTEGER" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MedicineID, MedicineName, CommonName, Specification, ManufacturerID, UnitID, DosageFormsID, 
+    GoodsKindID, MCKID, TinyUnitId, ModifierId, MedicineKindID, TinyNumber, TinySpecification, 
+    BarCode, RetailStdPrice, PurchasePrice, IsPrescription, SalePrice, Comment, StandardCode, 
+    IsHealthCare, isdel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from medicine
+    where MedicineID = #{medicineID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from medicine
+    where MedicineID = #{medicineID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.accp.drug.pojo.Medicine" >
+    insert into medicine (MedicineID, MedicineName, CommonName, 
+      Specification, ManufacturerID, UnitID, 
+      DosageFormsID, GoodsKindID, MCKID, 
+      TinyUnitId, ModifierId, MedicineKindID, 
+      TinyNumber, TinySpecification, BarCode, 
+      RetailStdPrice, PurchasePrice, IsPrescription, 
+      SalePrice, Comment, StandardCode, 
+      IsHealthCare, isdel)
+    values (#{medicineID,jdbcType=INTEGER}, #{medicineName,jdbcType=VARCHAR}, #{commonName,jdbcType=VARCHAR}, 
+      #{specification,jdbcType=VARCHAR}, #{manufacturerID,jdbcType=INTEGER}, #{unitID,jdbcType=INTEGER}, 
+      #{dosageFormsID,jdbcType=INTEGER}, #{goodsKindID,jdbcType=INTEGER}, #{MCKID,jdbcType=INTEGER}, 
+      #{tinyUnitId,jdbcType=INTEGER}, #{modifierId,jdbcType=VARCHAR}, #{medicineKindID,jdbcType=INTEGER}, 
+      #{tinyNumber,jdbcType=INTEGER}, #{tinySpecification,jdbcType=VARCHAR}, #{barCode,jdbcType=VARCHAR}, 
+      #{retailStdPrice,jdbcType=DECIMAL}, #{purchasePrice,jdbcType=DECIMAL}, #{isPrescription,jdbcType=INTEGER}, 
+      #{salePrice,jdbcType=DECIMAL}, #{comment,jdbcType=VARCHAR}, #{standardCode,jdbcType=VARCHAR}, 
+      #{isHealthCare,jdbcType=INTEGER}, #{isdel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.drug.pojo.Medicine" >
+    insert into medicine
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="medicineID != null" >
+        MedicineID,
+      </if>
+      <if test="medicineName != null" >
+        MedicineName,
+      </if>
+      <if test="commonName != null" >
+        CommonName,
+      </if>
+      <if test="specification != null" >
+        Specification,
+      </if>
+      <if test="manufacturerID != null" >
+        ManufacturerID,
+      </if>
+      <if test="unitID != null" >
+        UnitID,
+      </if>
+      <if test="dosageFormsID != null" >
+        DosageFormsID,
+      </if>
+      <if test="goodsKindID != null" >
+        GoodsKindID,
+      </if>
+      <if test="MCKID != null" >
+        MCKID,
+      </if>
+      <if test="tinyUnitId != null" >
+        TinyUnitId,
+      </if>
+      <if test="modifierId != null" >
+        ModifierId,
+      </if>
+      <if test="medicineKindID != null" >
+        MedicineKindID,
+      </if>
+      <if test="tinyNumber != null" >
+        TinyNumber,
+      </if>
+      <if test="tinySpecification != null" >
+        TinySpecification,
+      </if>
+      <if test="barCode != null" >
+        BarCode,
+      </if>
+      <if test="retailStdPrice != null" >
+        RetailStdPrice,
+      </if>
+      <if test="purchasePrice != null" >
+        PurchasePrice,
+      </if>
+      <if test="isPrescription != null" >
+        IsPrescription,
+      </if>
+      <if test="salePrice != null" >
+        SalePrice,
+      </if>
+      <if test="comment != null" >
+        Comment,
+      </if>
+      <if test="standardCode != null" >
+        StandardCode,
+      </if>
+      <if test="isHealthCare != null" >
+        IsHealthCare,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="medicineID != null" >
+        #{medicineID,jdbcType=INTEGER},
+      </if>
+      <if test="medicineName != null" >
+        #{medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="commonName != null" >
+        #{commonName,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturerID != null" >
+        #{manufacturerID,jdbcType=INTEGER},
+      </if>
+      <if test="unitID != null" >
+        #{unitID,jdbcType=INTEGER},
+      </if>
+      <if test="dosageFormsID != null" >
+        #{dosageFormsID,jdbcType=INTEGER},
+      </if>
+      <if test="goodsKindID != null" >
+        #{goodsKindID,jdbcType=INTEGER},
+      </if>
+      <if test="MCKID != null" >
+        #{MCKID,jdbcType=INTEGER},
+      </if>
+      <if test="tinyUnitId != null" >
+        #{tinyUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="modifierId != null" >
+        #{modifierId,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineKindID != null" >
+        #{medicineKindID,jdbcType=INTEGER},
+      </if>
+      <if test="tinyNumber != null" >
+        #{tinyNumber,jdbcType=INTEGER},
+      </if>
+      <if test="tinySpecification != null" >
+        #{tinySpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="retailStdPrice != null" >
+        #{retailStdPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="purchasePrice != null" >
+        #{purchasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isPrescription != null" >
+        #{isPrescription,jdbcType=INTEGER},
+      </if>
+      <if test="salePrice != null" >
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="standardCode != null" >
+        #{standardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isHealthCare != null" >
+        #{isHealthCare,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.drug.pojo.Medicine" >
+    update medicine
+    <set >
+      <if test="medicineName != null" >
+        MedicineName = #{medicineName,jdbcType=VARCHAR},
+      </if>
+      <if test="commonName != null" >
+        CommonName = #{commonName,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null" >
+        Specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturerID != null" >
+        ManufacturerID = #{manufacturerID,jdbcType=INTEGER},
+      </if>
+      <if test="unitID != null" >
+        UnitID = #{unitID,jdbcType=INTEGER},
+      </if>
+      <if test="dosageFormsID != null" >
+        DosageFormsID = #{dosageFormsID,jdbcType=INTEGER},
+      </if>
+      <if test="goodsKindID != null" >
+        GoodsKindID = #{goodsKindID,jdbcType=INTEGER},
+      </if>
+      <if test="MCKID != null" >
+        MCKID = #{MCKID,jdbcType=INTEGER},
+      </if>
+      <if test="tinyUnitId != null" >
+        TinyUnitId = #{tinyUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="modifierId != null" >
+        ModifierId = #{modifierId,jdbcType=VARCHAR},
+      </if>
+      <if test="medicineKindID != null" >
+        MedicineKindID = #{medicineKindID,jdbcType=INTEGER},
+      </if>
+      <if test="tinyNumber != null" >
+        TinyNumber = #{tinyNumber,jdbcType=INTEGER},
+      </if>
+      <if test="tinySpecification != null" >
+        TinySpecification = #{tinySpecification,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null" >
+        BarCode = #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="retailStdPrice != null" >
+        RetailStdPrice = #{retailStdPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="purchasePrice != null" >
+        PurchasePrice = #{purchasePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="isPrescription != null" >
+        IsPrescription = #{isPrescription,jdbcType=INTEGER},
+      </if>
+      <if test="salePrice != null" >
+        SalePrice = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="comment != null" >
+        Comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="standardCode != null" >
+        StandardCode = #{standardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isHealthCare != null" >
+        IsHealthCare = #{isHealthCare,jdbcType=INTEGER},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where MedicineID = #{medicineID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.drug.pojo.Medicine" >
+    update medicine
+    set MedicineName = #{medicineName,jdbcType=VARCHAR},
+      CommonName = #{commonName,jdbcType=VARCHAR},
+      Specification = #{specification,jdbcType=VARCHAR},
+      ManufacturerID = #{manufacturerID,jdbcType=INTEGER},
+      UnitID = #{unitID,jdbcType=INTEGER},
+      DosageFormsID = #{dosageFormsID,jdbcType=INTEGER},
+      GoodsKindID = #{goodsKindID,jdbcType=INTEGER},
+      MCKID = #{MCKID,jdbcType=INTEGER},
+      TinyUnitId = #{tinyUnitId,jdbcType=INTEGER},
+      ModifierId = #{modifierId,jdbcType=VARCHAR},
+      MedicineKindID = #{medicineKindID,jdbcType=INTEGER},
+      TinyNumber = #{tinyNumber,jdbcType=INTEGER},
+      TinySpecification = #{tinySpecification,jdbcType=VARCHAR},
+      BarCode = #{barCode,jdbcType=VARCHAR},
+      RetailStdPrice = #{retailStdPrice,jdbcType=DECIMAL},
+      PurchasePrice = #{purchasePrice,jdbcType=DECIMAL},
+      IsPrescription = #{isPrescription,jdbcType=INTEGER},
+      SalePrice = #{salePrice,jdbcType=DECIMAL},
+      Comment = #{comment,jdbcType=VARCHAR},
+      StandardCode = #{standardCode,jdbcType=VARCHAR},
+      IsHealthCare = #{isHealthCare,jdbcType=INTEGER},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where MedicineID = #{medicineID,jdbcType=INTEGER}
+  </update>
+</mapper>

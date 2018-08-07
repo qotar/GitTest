@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.drug.mapper.GoodskindMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.drug.pojo.Goodskind" >
+    <id column="GoodsKindID" property="goodsKindID" jdbcType="INTEGER" />
+    <result column="GoodsKindName" property="goodsKindName" jdbcType="VARCHAR" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    GoodsKindID, GoodsKindName, isdel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goodskind
+    where GoodsKindID = #{goodsKindID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goodskind
+    where GoodsKindID = #{goodsKindID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.accp.drug.pojo.Goodskind" >
+    insert into goodskind (GoodsKindID, GoodsKindName, isdel
+      )
+    values (#{goodsKindID,jdbcType=INTEGER}, #{goodsKindName,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.drug.pojo.Goodskind" >
+    insert into goodskind
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsKindID != null" >
+        GoodsKindID,
+      </if>
+      <if test="goodsKindName != null" >
+        GoodsKindName,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsKindID != null" >
+        #{goodsKindID,jdbcType=INTEGER},
+      </if>
+      <if test="goodsKindName != null" >
+        #{goodsKindName,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.drug.pojo.Goodskind" >
+    update goodskind
+    <set >
+      <if test="goodsKindName != null" >
+        GoodsKindName = #{goodsKindName,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where GoodsKindID = #{goodsKindID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.drug.pojo.Goodskind" >
+    update goodskind
+    set GoodsKindName = #{goodsKindName,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where GoodsKindID = #{goodsKindID,jdbcType=INTEGER}
+  </update>
+</mapper>

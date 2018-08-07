@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.drug.mapper.SpecificationMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.drug.pojo.Specification" >
+    <id column="SpecificationID" property="specificationID" jdbcType="INTEGER" />
+    <result column="SpecificationName" property="specificationName" jdbcType="VARCHAR" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SpecificationID, SpecificationName, isdel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from specification
+    where SpecificationID = #{specificationID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from specification
+    where SpecificationID = #{specificationID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.accp.drug.pojo.Specification" >
+    insert into specification (SpecificationID, SpecificationName, 
+      isdel)
+    values (#{specificationID,jdbcType=INTEGER}, #{specificationName,jdbcType=VARCHAR}, 
+      #{isdel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.drug.pojo.Specification" >
+    insert into specification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="specificationID != null" >
+        SpecificationID,
+      </if>
+      <if test="specificationName != null" >
+        SpecificationName,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="specificationID != null" >
+        #{specificationID,jdbcType=INTEGER},
+      </if>
+      <if test="specificationName != null" >
+        #{specificationName,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.drug.pojo.Specification" >
+    update specification
+    <set >
+      <if test="specificationName != null" >
+        SpecificationName = #{specificationName,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where SpecificationID = #{specificationID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.drug.pojo.Specification" >
+    update specification
+    set SpecificationName = #{specificationName,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where SpecificationID = #{specificationID,jdbcType=INTEGER}
+  </update>
+</mapper>

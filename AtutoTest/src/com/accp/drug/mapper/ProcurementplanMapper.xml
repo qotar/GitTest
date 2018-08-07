@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.drug.mapper.ProcurementplanMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.drug.pojo.Procurementplan" >
+    <id column="PPID" property="PPID" jdbcType="INTEGER" />
+    <result column="MedicineID" property="medicineID" jdbcType="INTEGER" />
+    <result column="Lower" property="lower" jdbcType="INTEGER" />
+    <result column="PPNumber" property="PPNumber" jdbcType="INTEGER" />
+    <result column="PPOrganization" property="PPOrganization" jdbcType="VARCHAR" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PPID, MedicineID, Lower, PPNumber, PPOrganization, isdel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from procurementplan
+    where PPID = #{PPID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from procurementplan
+    where PPID = #{PPID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.accp.drug.pojo.Procurementplan" >
+    insert into procurementplan (PPID, MedicineID, Lower, 
+      PPNumber, PPOrganization, isdel
+      )
+    values (#{PPID,jdbcType=INTEGER}, #{medicineID,jdbcType=INTEGER}, #{lower,jdbcType=INTEGER}, 
+      #{PPNumber,jdbcType=INTEGER}, #{PPOrganization,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.drug.pojo.Procurementplan" >
+    insert into procurementplan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="PPID != null" >
+        PPID,
+      </if>
+      <if test="medicineID != null" >
+        MedicineID,
+      </if>
+      <if test="lower != null" >
+        Lower,
+      </if>
+      <if test="PPNumber != null" >
+        PPNumber,
+      </if>
+      <if test="PPOrganization != null" >
+        PPOrganization,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="PPID != null" >
+        #{PPID,jdbcType=INTEGER},
+      </if>
+      <if test="medicineID != null" >
+        #{medicineID,jdbcType=INTEGER},
+      </if>
+      <if test="lower != null" >
+        #{lower,jdbcType=INTEGER},
+      </if>
+      <if test="PPNumber != null" >
+        #{PPNumber,jdbcType=INTEGER},
+      </if>
+      <if test="PPOrganization != null" >
+        #{PPOrganization,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.drug.pojo.Procurementplan" >
+    update procurementplan
+    <set >
+      <if test="medicineID != null" >
+        MedicineID = #{medicineID,jdbcType=INTEGER},
+      </if>
+      <if test="lower != null" >
+        Lower = #{lower,jdbcType=INTEGER},
+      </if>
+      <if test="PPNumber != null" >
+        PPNumber = #{PPNumber,jdbcType=INTEGER},
+      </if>
+      <if test="PPOrganization != null" >
+        PPOrganization = #{PPOrganization,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PPID = #{PPID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.drug.pojo.Procurementplan" >
+    update procurementplan
+    set MedicineID = #{medicineID,jdbcType=INTEGER},
+      Lower = #{lower,jdbcType=INTEGER},
+      PPNumber = #{PPNumber,jdbcType=INTEGER},
+      PPOrganization = #{PPOrganization,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where PPID = #{PPID,jdbcType=INTEGER}
+  </update>
+</mapper>

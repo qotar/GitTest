@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.drug.mapper.ManufacturerMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.drug.pojo.Manufacturer" >
+    <id column="ManufacturerId" property="manufacturerId" jdbcType="INTEGER" />
+    <result column="ManufacturerName" property="manufacturerName" jdbcType="VARCHAR" />
+    <result column="Shor" property="shor" jdbcType="VARCHAR" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ManufacturerId, ManufacturerName, Shor, isdel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from manufacturer
+    where ManufacturerId = #{manufacturerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from manufacturer
+    where ManufacturerId = #{manufacturerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.accp.drug.pojo.Manufacturer" >
+    insert into manufacturer (ManufacturerId, ManufacturerName, 
+      Shor, isdel)
+    values (#{manufacturerId,jdbcType=INTEGER}, #{manufacturerName,jdbcType=VARCHAR}, 
+      #{shor,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.drug.pojo.Manufacturer" >
+    insert into manufacturer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="manufacturerId != null" >
+        ManufacturerId,
+      </if>
+      <if test="manufacturerName != null" >
+        ManufacturerName,
+      </if>
+      <if test="shor != null" >
+        Shor,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="manufacturerId != null" >
+        #{manufacturerId,jdbcType=INTEGER},
+      </if>
+      <if test="manufacturerName != null" >
+        #{manufacturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="shor != null" >
+        #{shor,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.drug.pojo.Manufacturer" >
+    update manufacturer
+    <set >
+      <if test="manufacturerName != null" >
+        ManufacturerName = #{manufacturerName,jdbcType=VARCHAR},
+      </if>
+      <if test="shor != null" >
+        Shor = #{shor,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ManufacturerId = #{manufacturerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.drug.pojo.Manufacturer" >
+    update manufacturer
+    set ManufacturerName = #{manufacturerName,jdbcType=VARCHAR},
+      Shor = #{shor,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where ManufacturerId = #{manufacturerId,jdbcType=INTEGER}
+  </update>
+</mapper>

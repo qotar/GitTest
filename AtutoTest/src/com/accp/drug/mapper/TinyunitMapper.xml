@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.drug.mapper.TinyunitMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.drug.pojo.Tinyunit" >
+    <id column="TinyUnitId" property="tinyUnitId" jdbcType="INTEGER" />
+    <result column="TinyUnitName" property="tinyUnitName" jdbcType="VARCHAR" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TinyUnitId, TinyUnitName, isdel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tinyunit
+    where TinyUnitId = #{tinyUnitId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tinyunit
+    where TinyUnitId = #{tinyUnitId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.accp.drug.pojo.Tinyunit" >
+    insert into tinyunit (TinyUnitId, TinyUnitName, isdel
+      )
+    values (#{tinyUnitId,jdbcType=INTEGER}, #{tinyUnitName,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.drug.pojo.Tinyunit" >
+    insert into tinyunit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tinyUnitId != null" >
+        TinyUnitId,
+      </if>
+      <if test="tinyUnitName != null" >
+        TinyUnitName,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tinyUnitId != null" >
+        #{tinyUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="tinyUnitName != null" >
+        #{tinyUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.drug.pojo.Tinyunit" >
+    update tinyunit
+    <set >
+      <if test="tinyUnitName != null" >
+        TinyUnitName = #{tinyUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where TinyUnitId = #{tinyUnitId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.drug.pojo.Tinyunit" >
+    update tinyunit
+    set TinyUnitName = #{tinyUnitName,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where TinyUnitId = #{tinyUnitId,jdbcType=INTEGER}
+  </update>
+</mapper>

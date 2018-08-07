@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.drug.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.drug.pojo.Role" >
+    <id column="RID" property="RID" jdbcType="VARCHAR" />
+    <result column="RName" property="RName" jdbcType="VARCHAR" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RID, RName, isdel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where RID = #{RID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from role
+    where RID = #{RID,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.accp.drug.pojo.Role" >
+    insert into role (RID, RName, isdel
+      )
+    values (#{RID,jdbcType=VARCHAR}, #{RName,jdbcType=VARCHAR}, #{isdel,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.drug.pojo.Role" >
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="RID != null" >
+        RID,
+      </if>
+      <if test="RName != null" >
+        RName,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="RID != null" >
+        #{RID,jdbcType=VARCHAR},
+      </if>
+      <if test="RName != null" >
+        #{RName,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.drug.pojo.Role" >
+    update role
+    <set >
+      <if test="RName != null" >
+        RName = #{RName,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where RID = #{RID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.drug.pojo.Role" >
+    update role
+    set RName = #{RName,jdbcType=VARCHAR},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where RID = #{RID,jdbcType=VARCHAR}
+  </update>
+</mapper>

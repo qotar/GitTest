@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.drug.mapper.PrivilegeMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.drug.pojo.Privilege" >
+    <id column="PID" property="PID" jdbcType="INTEGER" />
+    <result column="RID" property="RID" jdbcType="VARCHAR" />
+    <result column="MID" property="MID" jdbcType="INTEGER" />
+    <result column="Display" property="display" jdbcType="BIT" />
+    <result column="isdel" property="isdel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PID, RID, MID, Display, isdel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from privilege
+    where PID = #{PID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from privilege
+    where PID = #{PID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.accp.drug.pojo.Privilege" >
+    insert into privilege (PID, RID, MID, 
+      Display, isdel)
+    values (#{PID,jdbcType=INTEGER}, #{RID,jdbcType=VARCHAR}, #{MID,jdbcType=INTEGER}, 
+      #{display,jdbcType=BIT}, #{isdel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.drug.pojo.Privilege" >
+    insert into privilege
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="PID != null" >
+        PID,
+      </if>
+      <if test="RID != null" >
+        RID,
+      </if>
+      <if test="MID != null" >
+        MID,
+      </if>
+      <if test="display != null" >
+        Display,
+      </if>
+      <if test="isdel != null" >
+        isdel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="PID != null" >
+        #{PID,jdbcType=INTEGER},
+      </if>
+      <if test="RID != null" >
+        #{RID,jdbcType=VARCHAR},
+      </if>
+      <if test="MID != null" >
+        #{MID,jdbcType=INTEGER},
+      </if>
+      <if test="display != null" >
+        #{display,jdbcType=BIT},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.drug.pojo.Privilege" >
+    update privilege
+    <set >
+      <if test="RID != null" >
+        RID = #{RID,jdbcType=VARCHAR},
+      </if>
+      <if test="MID != null" >
+        MID = #{MID,jdbcType=INTEGER},
+      </if>
+      <if test="display != null" >
+        Display = #{display,jdbcType=BIT},
+      </if>
+      <if test="isdel != null" >
+        isdel = #{isdel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PID = #{PID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.drug.pojo.Privilege" >
+    update privilege
+    set RID = #{RID,jdbcType=VARCHAR},
+      MID = #{MID,jdbcType=INTEGER},
+      Display = #{display,jdbcType=BIT},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where PID = #{PID,jdbcType=INTEGER}
+  </update>
+</mapper>
